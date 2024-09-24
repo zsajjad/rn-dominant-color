@@ -4,3 +4,10 @@ export interface ImageColorResult {
   background: string;
   detail: string;
 }
+
+export interface AndroidColors {
+  dominantColor: string;
+  averageColor: string;
+  lightVibrantColor: string;
+  vibrantColor: string;
+}

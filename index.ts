@@ -1,5 +1,5 @@
 import { NativeModules, Platform } from "react-native";
-import { ImageColorResult } from "./types";
+import { AndroidColors, ImageColorResult } from "./types";
 
 const { RNDominantColor } = NativeModules;
 
@@ -29,7 +29,7 @@ export const getColorFromURL: (url: string) => Promise<ImageColorResult> = (
 
   return new Promise<ImageColorResult>((resolve, reject) => {
     RNDominantColor.colorsFromUrl(url)
-      .then((colors) => {
+      .then((colors: AndroidColors) => {
         resolve({
           primary: colors.dominantColor,
           secondary: colors.averageColor,
@@ -37,7 +37,7 @@ export const getColorFromURL: (url: string) => Promise<ImageColorResult> = (
           detail: colors.vibrantColor,
         });
       })
-      .catch((err) => {
+      .catch((err: unknown) => {
         reject({
           primary: "#00000000",
           secondary: "#00000000",
@@ -47,5 +47,3 @@ export const getColorFromURL: (url: string) => Promise<ImageColorResult> = (
       });
   });
 };
-
-export { ImageColorResult };
